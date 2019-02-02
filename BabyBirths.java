@@ -21,4 +21,24 @@ public class BabyBirths {
             
         }
     }
+    
+    public void totalBirths (FileResource fr) {
+        int totalBirt = 0;
+        int totalGirls = 0;
+        int totalBoys = 0;
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            int numBorn = Integer.parseInt(rec.get(2));
+            totalBirt += numBorn;
+            if (rec.get(1).equals("M")) totalBoys += numBorn;
+            else totalGirls += numBorn;    
+        }
+        System.out.println("total Birt = " + totalBirt);
+        System.out.println("total girls = " + totalGirls);  
+        System.out.println("total boys = " + totalBoys);
+    }
+    
+    public void testTotalBirth () {
+        FileResource fr = new FileResource("data/yob2014.csv");
+        totalBirths(fr);
+    }
 }
