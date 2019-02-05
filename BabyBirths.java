@@ -61,4 +61,22 @@ public class BabyBirths {
         rank = getRank(2012, "Mason", "F");
         System.out.println("the rank of Mason in females is " + rank);        
     }
+    
+    public String getName(int year, int rank, String gender){
+        String path = "data/testing/yob" + year + "short.csv";
+        FileResource fr = new FileResource(path);
+        int count = 0;
+        for (CSVRecord rec : fr.getCSVParser(false)){
+            if (rec.get(1).equals(gender)) count += 1;
+            if (count == rank) return rec.get(0);
+        }
+        return "NO NAME";
+    }
+    
+    public void testGetName(){
+        String name = getName(2012,2, "M");
+        System.out.println("the name with the second rank in males is " + name);
+        name = getName(2012,2, "F");
+        System.out.println("the name with the second rank in females is " + name);
+    }
 }
