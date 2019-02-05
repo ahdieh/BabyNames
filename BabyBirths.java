@@ -7,6 +7,7 @@
  */
 import edu.duke.*;
 import org.apache.commons.csv.*;
+import java.io.File;
 
 public class BabyBirths {
     public void printNames(){
@@ -89,5 +90,28 @@ public class BabyBirths {
     
     public void testWhatIsNameInYear(){
         whatIsNameInYear("Isabella", 2012, 2014, "F");
+    }
+    
+    public int yearOfHighestRank(String name, String gender){
+        int rank = 0;
+        int yearOfHighest = 0;
+        DirectoryResource dr = new DirectoryResource();
+        for(File f : dr.selectedFiles()){
+            FileResource fr = new FileResource(f);
+            String fileName = f.getName();
+            int year = Integer.parseInt(fileName.replaceAll("[\\D]", ""));
+            int currentRank = getRank(year, name, gender);
+            if (currentRank < rank || rank == 0){
+                rank = currentRank;
+                yearOfHighest = year;
+            }
+        }
+        if (yearOfHighest == 0) return -1;
+        else return yearOfHighest;
+    }
+    
+    public void testYearOfHighestRank(){
+        int year = yearOfHighestRank("Mason", "M");
+        System.out.println(year);
     }
 }
