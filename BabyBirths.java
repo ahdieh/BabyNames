@@ -79,4 +79,15 @@ public class BabyBirths {
         name = getName(2012,2, "F");
         System.out.println("the name with the second rank in females is " + name);
     }
+    
+    public void whatIsNameInYear (String name, int year, int newYear, String gender){
+        int rank = getRank (year, name, gender);
+        String newName = getName(newYear, rank, gender);
+        System.out.println(name + " born in " + year + " would be " + newName + 
+                            " if she was born in " + newYear + ".");
+    }
+    
+    public void testWhatIsNameInYear(){
+        whatIsNameInYear("Isabella", 2012, 2014, "F");
+    }
 }
