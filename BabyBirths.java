@@ -37,8 +37,28 @@ public class BabyBirths {
         System.out.println("total boys = " + totalBoys);
     }
     
+    public int getRank (int year, String name, String gender) {
+        String path = "data/testing/yob" + Integer.toString(year) + "short.csv";
+        FileResource fr = new FileResource(path);
+        int rank = 0;
+        for (CSVRecord rec : fr.getCSVParser(false)){           
+           if(rec.get(1).equals(gender)){
+               rank += 1;
+               if (rec.get(0).equals(name)) return rank;
+           }           
+        }
+        return -1;
+    }
+    
     public void testTotalBirth () {
         FileResource fr = new FileResource("data/yob2014.csv");
         totalBirths(fr);
+    }
+    
+    public void testGetRank(){
+        int rank = getRank(2012, "Mason", "M");
+        System.out.println("the rank of Mason in males is " + rank);
+        rank = getRank(2012, "Mason", "F");
+        System.out.println("the rank of Mason in females is " + rank);        
     }
 }
