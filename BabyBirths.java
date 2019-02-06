@@ -9,6 +9,7 @@ import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.math.RoundingMode;
 
 public class BabyBirths {
     public void printNames(){
@@ -136,6 +137,7 @@ public class BabyBirths {
     
     public void testGetAverageRank(){
         DecimalFormat df2 = new DecimalFormat(".##");
+        df2.setRoundingMode(RoundingMode.DOWN);
         double averageRank = getAverageRank("Mason", "M");
         System.out.println(df2.format(averageRank));        
         averageRank = getAverageRank("Jacob", "M");
