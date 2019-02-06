@@ -137,6 +137,8 @@ public class BabyBirths {
         double averageRank = getAverageRank("Mason", "M");
         System.out.println(averageRank);        
         averageRank = getAverageRank("Jacob", "M");
-        System.out.println(averageRank);;
+        System.out.println(averageRank);
+        averageRank = getAverageRank("Mason", "F");
+        System.out.println(averageRank);
     }
 }
