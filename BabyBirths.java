@@ -135,10 +135,10 @@ public class BabyBirths {
     
     public void testGetAverageRank(){
         double averageRank = getAverageRank("Mason", "M");
-        System.out.println(averageRank);        
+        System.out.println(String.format ("%.2f", averageRank));        
         averageRank = getAverageRank("Jacob", "M");
-        System.out.println(averageRank);
+        System.out.println(String.format ("%.2f", averageRank));   
         averageRank = getAverageRank("Mason", "F");
-        System.out.println(averageRank);
+        System.out.println(String.format ("%.2f", averageRank));
     }
 }
