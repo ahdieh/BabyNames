@@ -8,6 +8,7 @@
 import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.File;
+import java.text.DecimalFormat;
 
 public class BabyBirths {
     public void printNames(){
@@ -134,11 +135,12 @@ public class BabyBirths {
     }
     
     public void testGetAverageRank(){
+        DecimalFormat df2 = new DecimalFormat(".##");
         double averageRank = getAverageRank("Mason", "M");
-        System.out.println(String.format ("%.2f", averageRank));        
+        System.out.println(df2.format(averageRank));        
         averageRank = getAverageRank("Jacob", "M");
-        System.out.println(String.format ("%.2f", averageRank));   
+        System.out.println(df2.format(averageRank));  
         averageRank = getAverageRank("Mason", "F");
-        System.out.println(String.format ("%.2f", averageRank));
+        System.out.println(df2.format(averageRank));
     }
 }
