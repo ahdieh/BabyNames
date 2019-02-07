@@ -168,4 +168,11 @@ public class BabyBirths {
         }
         return rankedHigher;
     }
+    
+    public void testGetTotalBirthsRankedHigher(){
+        int rankedHigher = getTotalBirthsRankedHigher(2012, "Mason", "M");
+        System.out.println(rankedHigher);
+        rankedHigher = getTotalBirthsRankedHigher(2012, "Mason", "F");
+        System.out.println(rankedHigher);
+    }
 }
