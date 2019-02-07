@@ -24,7 +24,17 @@ public class BabyBirths {
             
         }
     }
-        
+    
+    public void countNames(int year, String gender){
+        String path = "data/us_babynames_by_year/yob" + year + ".csv";
+        FileResource fr = new FileResource(path);
+        int count = 0;
+        for (CSVRecord rec: fr.getCSVParser(false)){
+            if (rec.get(1).equals(gender)) count += 1;
+        }
+        System.out.println(count);
+    }
+    
     // print the number of girls names , the number of boys names and the 
     // total names in the file.   
     public void totalBirths (FileResource fr) {
