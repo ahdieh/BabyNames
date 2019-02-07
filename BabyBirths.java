@@ -145,4 +145,27 @@ public class BabyBirths {
         averageRank = getAverageRank("Mason", "F");
         System.out.println(df2.format(averageRank));
     }
+    
+    public int getTotalBirthsRankedHigher(int year, String name, String gender){
+        String fileName = "yob" + year + "short.csv";
+        String path = "data/testing/" + fileName;
+        FileResource fr = new FileResource(path);
+        int number = 0;
+        for(CSVRecord rec : fr.getCSVParser()){
+            if (rec.get(0).equals(name) && rec.get(1).equals(gender)) 
+                number = Integer.parseInt(rec.get(2));
+        }
+        int rankedHigher = 0;
+        if (number == 0) return rankedHigher = -1;        
+        for(CSVRecord rec : fr.getCSVParser(false)){            
+           if (rec.get(1).equals(gender)){
+               
+               int rank = Integer.parseInt(rec.get(2)); 
+               if (rank > number) {
+                   rankedHigher += rank;
+                }
+            }
+        }
+        return rankedHigher;
+    }
 }
