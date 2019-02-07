@@ -25,6 +25,8 @@ public class BabyBirths {
         }
     }
     
+    // print the number of girls names , the number of boys names and the 
+    // total names in the file.   
     public void totalBirths (FileResource fr) {
         int totalBirt = 0;
         int totalGirls = 0;
@@ -39,7 +41,15 @@ public class BabyBirths {
         System.out.println("total girls = " + totalGirls);  
         System.out.println("total boys = " + totalBoys);
     }
+        
+    public void testTotalBirth () {
+        FileResource fr = new FileResource("data/yob2014.csv");
+        totalBirths(fr);
+    }
     
+    // This method returns the rank of the name in the file for the given 
+    // gender, where rank 1 is the name with the largest number of births. 
+    // If the name is not in the file, then -1 is returned.
     public int getRank (int year, String name, String gender) {
         String path = "data/testing/yob" + Integer.toString(year) + "short.csv";
         FileResource fr = new FileResource(path);
@@ -52,12 +62,7 @@ public class BabyBirths {
         }
         return -1;
     }
-    
-    public void testTotalBirth () {
-        FileResource fr = new FileResource("data/yob2014.csv");
-        totalBirths(fr);
-    }
-    
+        
     public void testGetRank(){
         int rank = getRank(2012, "Mason", "M");
         System.out.println("the rank of Mason in males is " + rank);
@@ -65,6 +70,11 @@ public class BabyBirths {
         System.out.println("the rank of Mason in females is " + rank);        
     }
     
+    
+    // This method returns the name of the person in the file at this rank, 
+    // for the given gender, where rank 1 is the name with the largest number
+    // of births. If the rank does not exist in the file, then “NO NAME” is 
+    // returned.
     public String getName(int year, int rank, String gender){
         String path = "data/testing/yob" + year + "short.csv";
         FileResource fr = new FileResource(path);
@@ -83,6 +93,11 @@ public class BabyBirths {
         System.out.println("the name with the second rank in females is " + name);
     }
     
+    // This method determines what name would have been named if they were 
+    // born in a different year, based on the same popularity. That is, you 
+    // should determine the rank of name in the year they were born, and 
+    // then print the name born in newYear that is at the same rank and same 
+    // gender.
     public void whatIsNameInYear (String name, int year, int newYear, String gender){
         int rank = getRank (year, name, gender);
         String newName = getName(newYear, rank, gender);
@@ -94,6 +109,10 @@ public class BabyBirths {
         whatIsNameInYear("Isabella", 2012, 2014, "F");
     }
     
+    // This method selects a range of files to process and returns an 
+    // integer, the year with the highest rank for the name and gender. If 
+    // the name and gender are not in any of the selected files, it should 
+    // return -1.
     public int yearOfHighestRank(String name, String gender){
         int rank = 0;
         int yearOfHighest = 0;
@@ -117,6 +136,10 @@ public class BabyBirths {
         System.out.println(year);
     }
     
+    // This method selects a range of files to process and returns a double 
+    // representing the average rank of the name and gender over the 
+    // selected files. It should return -1.0 if the name is not ranked in 
+    // any of the selected files.
     public double getAverageRank (String name, String gender){
         double averageRank = -1.0;
         int totalRank = 0;
@@ -146,6 +169,9 @@ public class BabyBirths {
         System.out.println(df2.format(averageRank));
     }
     
+    // This method returns an integer, the total number of births of those 
+    // names with the same gender and same year who are ranked higher than 
+    // name.
     public int getTotalBirthsRankedHigher(int year, String name, String gender){
         String fileName = "yob" + year + "short.csv";
         String path = "data/testing/" + fileName;
