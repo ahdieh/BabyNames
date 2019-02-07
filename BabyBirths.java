@@ -24,7 +24,7 @@ public class BabyBirths {
             
         }
     }
-    
+        
     // print the number of girls names , the number of boys names and the 
     // total names in the file.   
     public void totalBirths (FileResource fr) {
@@ -43,7 +43,9 @@ public class BabyBirths {
     }
         
     public void testTotalBirth () {
-        FileResource fr = new FileResource("data/yob2014.csv");
+        FileResource fr = new FileResource("data/us_babynames_by_year/yob1900.csv");
+        totalBirths(fr);
+        fr = new FileResource("data/us_babynames_by_year/yob1905.csv");
         totalBirths(fr);
     }
     
@@ -51,7 +53,7 @@ public class BabyBirths {
     // gender, where rank 1 is the name with the largest number of births. 
     // If the name is not in the file, then -1 is returned.
     public int getRank (int year, String name, String gender) {
-        String path = "data/testing/yob" + Integer.toString(year) + "short.csv";
+        String path = "data/yob" + Integer.toString(year) + ".csv";
         FileResource fr = new FileResource(path);
         int rank = 0;
         for (CSVRecord rec : fr.getCSVParser(false)){           
@@ -64,10 +66,10 @@ public class BabyBirths {
     }
         
     public void testGetRank(){
-        int rank = getRank(2012, "Mason", "M");
-        System.out.println("the rank of Mason in males is " + rank);
-        rank = getRank(2012, "Mason", "F");
-        System.out.println("the rank of Mason in females is " + rank);        
+        int rank = getRank(1960, "Emily", "F");
+        System.out.println("the rank of Emily in females is " + rank);
+        rank = getRank(1971, "Frank", "M");
+        System.out.println("the rank of Frank in males is " + rank);        
     }
     
     
@@ -76,7 +78,7 @@ public class BabyBirths {
     // of births. If the rank does not exist in the file, then “NO NAME” is 
     // returned.
     public String getName(int year, int rank, String gender){
-        String path = "data/testing/yob" + year + "short.csv";
+        String path = "data/yob" + year + ".csv";
         FileResource fr = new FileResource(path);
         int count = 0;
         for (CSVRecord rec : fr.getCSVParser(false)){
@@ -87,10 +89,10 @@ public class BabyBirths {
     }
     
     public void testGetName(){
-        String name = getName(2012,2, "M");
-        System.out.println("the name with the second rank in males is " + name);
-        name = getName(2012,2, "F");
-        System.out.println("the name with the second rank in females is " + name);
+        String name = getName(1982,450, "M");
+        System.out.println("the name with the rank of 450 in males is " + name);
+        name = getName(1980,350, "F");
+        System.out.println("the name with the rank of 350 in females is " + name);
     }
     
     // This method determines what name would have been named if they were 
@@ -106,7 +108,7 @@ public class BabyBirths {
     }
     
     public void testWhatIsNameInYear(){
-        whatIsNameInYear("Isabella", 2012, 2014, "F");
+        whatIsNameInYear("Owen", 1974, 2014, "M");
     }
     
     // This method selects a range of files to process and returns an 
@@ -132,7 +134,7 @@ public class BabyBirths {
     }
     
     public void testYearOfHighestRank(){
-        int year = yearOfHighestRank("Mason", "M");
+        int year = yearOfHighestRank("Mich", "M");
         System.out.println(year);
     }
     
@@ -161,20 +163,20 @@ public class BabyBirths {
     public void testGetAverageRank(){
         DecimalFormat df2 = new DecimalFormat(".##");
         df2.setRoundingMode(RoundingMode.DOWN);
-        double averageRank = getAverageRank("Mason", "M");
+        double averageRank = getAverageRank("Susan", "F");
         System.out.println(df2.format(averageRank));        
-        averageRank = getAverageRank("Jacob", "M");
+        averageRank = getAverageRank("Robert", "M");
         System.out.println(df2.format(averageRank));  
-        averageRank = getAverageRank("Mason", "F");
-        System.out.println(df2.format(averageRank));
+        //averageRank = getAverageRank("Mason", "F");
+        //System.out.println(df2.format(averageRank));
     }
     
     // This method returns an integer, the total number of births of those 
     // names with the same gender and same year who are ranked higher than 
     // name.
     public int getTotalBirthsRankedHigher(int year, String name, String gender){
-        String fileName = "yob" + year + "short.csv";
-        String path = "data/testing/" + fileName;
+        String fileName = "yob" + year + ".csv";
+        String path = "data/us_babynames_by_year/" + fileName;
         FileResource fr = new FileResource(path);
         int number = 0;
         for(CSVRecord rec : fr.getCSVParser()){
@@ -196,9 +198,9 @@ public class BabyBirths {
     }
     
     public void testGetTotalBirthsRankedHigher(){
-        int rankedHigher = getTotalBirthsRankedHigher(2012, "Mason", "M");
+        int rankedHigher = getTotalBirthsRankedHigher(1990, "Drew", "M");
         System.out.println(rankedHigher);
-        rankedHigher = getTotalBirthsRankedHigher(2012, "Mason", "F");
+        rankedHigher = getTotalBirthsRankedHigher(1990, "Emily", "F");
         System.out.println(rankedHigher);
     }
 }
