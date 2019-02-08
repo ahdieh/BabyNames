@@ -134,7 +134,7 @@ public class BabyBirths {
             String fileName = f.getName();
             int year = Integer.parseInt(fileName.replaceAll("[\\D]", ""));
             int currentRank = getRank(year, name, gender);
-            if (currentRank < rank || rank == 0){
+            if ((currentRank != -1) && (currentRank < rank || rank == 0)){
                 rank = currentRank;
                 yearOfHighest = year;
             }
