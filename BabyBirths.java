@@ -10,6 +10,7 @@ import org.apache.commons.csv.*;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class BabyBirths {
     public void printNames(){
@@ -25,18 +26,25 @@ public class BabyBirths {
         }
     }
     
-    public void countNames(int year, String gender){
+    // print the number of girls names , the number of boys names and the 
+    // total names in the file. 
+    public void countDistinctNames(int year){
         String path = "data/us_babynames_by_year/yob" + year + ".csv";
         FileResource fr = new FileResource(path);
-        int count = 0;
+        ArrayList<String> maleNames = new ArrayList<String>();
+        ArrayList <String> femaleNames = new ArrayList<String>();
         for (CSVRecord rec: fr.getCSVParser(false)){
-            if (rec.get(1).equals(gender)) count += 1;
+            String name = rec.get(0);
+            String gender = rec.get(1); 
+            if ((gender.equals("M")) && (!maleNames.contains(name))) maleNames.add(name);            
+            else if ((gender.equals("F")) && (!femaleNames.contains(name))) femaleNames.add(name);            
         }
-        System.out.println(count);
+        System.out.println("The number of girls' names: " + femaleNames.size());
+        System.out.println("The number of boys' names: " + maleNames.size());
     }
     
-    // print the number of girls names , the number of boys names and the 
-    // total names in the file.   
+    // print the number of girls , the number of boys and the 
+    // the total in the file.   
     public void totalBirths (FileResource fr) {
         int totalBirt = 0;
         int totalGirls = 0;
